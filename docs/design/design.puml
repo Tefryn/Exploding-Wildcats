@@ -3,11 +3,15 @@ package presentation{
     +class Main{
         +{static} main(String[])
     }
-    Main --> GameController
+    Main --> GameSetup
     Main --> GameView
 
+    +class GameSetup{
+    }
+    GameSetup --> GameController
     +class GameController{
-        +startGame(): void
+
+        +while loop
     }
     +class GameView{
         TBD
@@ -17,6 +21,8 @@ presentation.GameController --> domain.TurnController
 
 package domain{
     +class TurnController{
+        +list of players
+        +takeTurn() - Go back to while loop in GameController
     }
     TurnController --> Deck
     TurnController --> "*" Player
