@@ -1,0 +1,56 @@
+@startuml
+package presentation{
+    +class Main{
+        +{static} main(String[])
+    }
+    Main --> GameController
+    Main --> GameView
+
+    +class GameController{
+        +startGame(): void
+    }
+    +class GameView{
+        TBD
+    }
+}
+presentation.GameController --> domain.TurnController
+
+package domain{
+    +class TurnController{
+    }
+    TurnController --> Deck
+    TurnController --> "*" Player
+    TurnController --> Card
+
+
+    +class Player{
+        -hand: List<Card>
+
+        +playCard(Card): void
+        +endTurn(): void
+    }
+    Player --> "*" Card
+    Player ..> Deck
+
+    +class Deck{
+        -deck: LinkedList<Card>
+        -rand: SecureRandom
+
+        +Deck()
+        ~Deck(rand: SecureRandom)
+        +insertCardAtIndex(card: Card, index: int): void
+        ...
+
+    }
+
+    +class Card{
+
+    }
+
+    +enum CardType{
+
+    }
+    Card --> CardType
+
+}
+@enduml
