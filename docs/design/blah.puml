@@ -1,0 +1,120 @@
+@startuml
+package presentation
+{
+    +class Main
+    {
+        +{static} main(String[]) : void
+    }
+
+    +class GameView
+    {
+    }
+
+    +class XXXCardView
+    {
+    }
+
+    package setup
+    {
+        +class GameSetup
+        {
+            -gameController : GameController
+
+            +promptForNumPlayers()
+            +promptForLanguage()
+            -createGameController()
+            -createDeck()
+            -setUpDeck()
+            -createPlayers()
+            -setTurnOrder()
+            -dealHands()
+            -addExplodingKittensToHand()
+            -finishSetup()
+            ' call GameController.startgame
+        }
+    }
+
+    +class GameController
+    {
+        -playerAndTurnsLeft : List<(Player, int)>
+        -curPlayerIdx: int
+        -turnController : TurnController
+
+        +startGame()
+        -playTurn()
+        -checkRemainingPlayers()
+        -removePlayer()
+        +endGame()
+        -calculateNextTurn()
+        ' either decrements turns left or moves to next curPlayer
+        -changeNumTurns() : void
+    }
+}
+
+package domain
+{
+
+    package gamelogic
+    {
+        +class TurnController
+        {
+            -cardControllers : List<CardControllers>
+
+            +takeTurn(Player)
+            +promptForInput()
+
+            +PlayCard(CardType)
+            +getCardInfo(CardType)
+            +endPlayerTurn()
+            +drawCard(Deck) : Card
+            +endPrematurely()
+            +handleExplodingKitten()
+            -doCardAction(CardType)
+        }
+
+        +class Player
+        {
+            -hand: Map<CardType, int>
+
+            +playCard(CardType) : void
+            -CheckIfInHand()
+
+            +removeCard(CardType) : void
+            +addCard(Card) : void
+
+            +viewHand() : Map<CardType, int>
+        }
+    }
+
+    package deck
+    {
+        +class Deck
+        {
+            -deck: List<CardType>
+            -rand: SecureRandom
+
+            +Deck()
+            ~Deck(rand: SecureRandom)
+            +insertCardAtIndex(card: CardType, index: int): void
+            +drawCard() : CardType
+            +shuffleDeck() : void
+            +getCardAtIndex(index : int) : CardType
+            -checkIndexOutOfBounds(index : int) : void
+        }
+
+        +class XXXCardController
+        {
+            -cardType
+
+            +action()
+            +checkType()
+        }
+
+        +enum CardType
+        {
+            FaceDownCard
+            FaceUpCard
+        }
+    }
+}
+@enduml
