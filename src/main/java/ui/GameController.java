@@ -133,4 +133,16 @@ public class GameController implements ActivePlayersSubject {
 		return turnController.getCardCount(cardType);
 	}
 
+	public TurnController getTurnController() {
+		return this.turnController;
+	}
+
+	public TurnView getTurnView() {
+		return this.turnController.getTurnView();
+	}
+
+	public Deck getDeck() {
+		return this.turnController.getDeck(); // assuming stored in TurnController
+	}
+
 }

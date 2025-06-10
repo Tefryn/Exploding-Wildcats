@@ -200,4 +200,12 @@ public final class TurnController implements TurnSubject,
 	public int getCardCount(CardType cardType) {
 		return this.deck.getCardCount(cardType);
 	}
+
+	public TurnView getTurnView() {
+		return this.turnView;
+	}
+
+	public Deck getDeck() {
+		return this.deck; // assuming stored in TurnController
+	}
 }
